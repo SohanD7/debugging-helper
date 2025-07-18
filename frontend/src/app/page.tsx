@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import DebugForm from "@/components/features/DebugForm";
-import ContextViewer from "@/components/features/ContextViewer";
-import AnalysisDisplay from "@/components/features/AnalysisDisplay";
+import DebugForm from "@/components/DebugForm";
+import ContextViewer from "@/components/ContextViewer";
+import AnalysisDisplay from "@/components/AnalysisDisplay";
 import { useDebugSession } from "@/hooks/useDebugSession";
 
 export default function Home() {
