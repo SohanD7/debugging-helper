@@ -10,7 +10,7 @@ class MCPService {
   });
   this.contextManager = new ContextManager();
   this.server = new McpServer({
-   name: "ai-debugging-assistant",
+   name: "debugging-helper",
    version: "1.0.0",
   });
   this.setupTools();
