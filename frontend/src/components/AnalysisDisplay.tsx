@@ -2,7 +2,7 @@
 
 interface AnalysisDisplayProps {
  analysis: string;
- sessionId: string;
+ sessionId?: string | null;
 }
 
 export default function AnalysisDisplay({

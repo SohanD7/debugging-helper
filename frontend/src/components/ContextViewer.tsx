@@ -12,7 +12,7 @@ interface ContextSegment {
 }
 
 interface ContextViewerProps {
- sessionId?: string;
+ sessionId?: string | null;
  segments: ContextSegment[];
  onLoadSession?: (sessionId: string) => void;
 }
