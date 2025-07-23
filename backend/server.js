@@ -1,15 +1,14 @@
+import './src/config/env.js'; // Load environment variables and configurations
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import dotenv from "dotenv";
 import rateLimit from "express-rate-limit";
 import debugRoutes from "./src/routes/debug.js";
 import contextRoutes from "./src/routes/context.js";
 import historyRoutes from "./src/routes/history.js";
-import { errorHandler } from "./src/middleware/errorHandler.js";
+import { errorHandler } from "./src/errorHandler.js";
 import { logger } from "./src/utils/logger.js";
 
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;3

@@ -1,7 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { OpenAI } from "openai";
-import { logger } from "../utils/logger.js";
-import { ContextManager } from "../mcp/contextManager.js";
+import { logger } from "./utils/logger.js";
+import { ContextManager } from "./contextManager.js";
 
 class MCPService {
  constructor() {

@@ -1,5 +1,5 @@
 import express from "express";
-import MCPService from "../services/mcpService.js";
+import MCPService from "../mcpService.js";
 
 const router = express.Router();
 const mcpService = new MCPService();

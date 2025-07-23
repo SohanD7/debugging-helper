@@ -1,5 +1,5 @@
 import express from "express";
-import MCPService from "../services/mcpService.js";
+import MCPService from "../mcpService.js";
 import { logger } from "../utils/logger.js";
 import { v4 as uuidv4 } from "uuid";
 
