@@ -19,7 +19,10 @@
   "openai": "^4.0.0",
   "parse-git-diff": "^0.0.19",
   "uuid": "^9.0.0",
-  "winston": "^3.10.0"
+  "winston": "^3.10.0",
+  "@prisma/client": "^6.12.0",
+  "prisma": "^6.12.0",
+  "sqlite3": "^5.1.7"
  },
  "devDependencies": {
   "jest": "^29.0.0",
