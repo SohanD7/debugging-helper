@@ -4,12 +4,12 @@
  "type": "module",
  "main": "server.js",
  "scripts": {
-  "start": "npx prisma generate && node server.js",
+  "start": "npx prisma generate --schema=../../prisma/schema.prisma && node server.js",
   "prisma:generate": "prisma generate",
   "build": "npm run prisma:generate",
   "dev": "nodemon server.js",
   "test": "jest",
-  "postinstall": "npx prisma generate"
+  "postinstall": "npx prisma generate --schema=../../prisma/schema.prisma"
  },
  "dependencies": {
   "@modelcontextprotocol/sdk": "^1.0.0",
