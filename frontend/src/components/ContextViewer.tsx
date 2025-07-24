@@ -290,9 +290,6 @@ export default function ContextViewer({
    {/* Header */}
    <div className="bg-gradient-to-r from-slate-50 to-purple-50/30 px-6 py-5 border-b border-slate-200/50">
     <div className="flex items-center space-x-3 mb-4">
-     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-purple-500 to-pink-600 text-white shadow-lg">
-      <History className="h-5 w-5" />
-     </div>
      <div>
       <h2 className="text-lg font-bold text-slate-900">Context & History</h2>
       <p className="text-sm text-slate-600">Session memory and timeline</p>

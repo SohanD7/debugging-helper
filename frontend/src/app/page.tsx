@@ -52,36 +52,6 @@ function HeroSection() {
  );
 }
 
-// Quick Stats Component
-function QuickStats({ contextSegments }: { contextSegments: any[] }) {
- const stats = [
-  {
-   label: "Context Segments",
-   value: contextSegments.length,
-   color: "text-blue-600",
-  },
-  { label: "Analysis Ready", value: "AI", color: "text-green-600" },
-  { label: "Response Time", value: "~2s", color: "text-purple-600" },
- ];
-
- return (
-  <motion.div
-   initial={{ opacity: 0, y: 10 }}
-   animate={{ opacity: 1, y: 0 }}
-   transition={{ delay: 0.3 }}
-   className="flex justify-center space-x-8 mb-8"
-  >
-   {stats.map((stat, index) => (
-    <div key={index} className="text-center">
-     <div className={`text-2xl font-bold ${stat.color}`}>{stat.value}</div>
-     <div className="text-xs text-slate-500 uppercase tracking-wide">
-      {stat.label}
-     </div>
-    </div>
-   ))}
-  </motion.div>
- );
-}
 
 export default function Home() {
  const {
@@ -97,7 +67,6 @@ export default function Home() {
  return (
   <div className="min-h-screen">
    <HeroSection />
-   <QuickStats contextSegments={contextSegments} />
 
    <motion.div
     initial={{ opacity: 0 }}

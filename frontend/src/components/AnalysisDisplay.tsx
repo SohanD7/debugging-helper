@@ -108,7 +108,9 @@ function parseAnalysis(text: string): AnalysisSection[] {
 
  // Add final section
  if (currentSection && currentContent.length > 0) {
-  (currentSection as AnalysisSection).content = currentContent.join("\n").trim();
+  (currentSection as AnalysisSection).content = currentContent
+   .join("\n")
+   .trim();
   sections.push(currentSection);
  }
 
@@ -165,7 +167,24 @@ function CodeBlock({
 
    <SyntaxHighlighter
     language={language}
-    style={darkMode ? oneDark : oneLight}
+    style={
+     darkMode
+      ? oneDark
+      : {
+         ...oneLight,
+         ...{
+          'pre[class*="language-"]': {
+           ...(oneLight['pre[class*="language-"]'] || {}),
+           color: "#111",
+           background: "#f8fafc",
+          },
+          'code[class*="language-"]': {
+           ...(oneLight['code[class*="language-"]'] || {}),
+           color: "#111",
+          },
+         },
+        }
+    }
     className="!m-0 !rounded-lg !text-sm"
     showLineNumbers={children.split("\n").length > 5}
    >

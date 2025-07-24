@@ -168,7 +168,7 @@ function TypeSelector({
          className="absolute top-2 right-2"
          initial={{ scale: 0 }}
          animate={{ scale: 1 }}
-         transition={{ type: "spring", stiffness: 500, damping: 30 }}
+         transition={{ type: "spring", stiffness: 180, damping: 40 }}
         >
          <div
           className={cn(
@@ -269,7 +269,7 @@ function ContentTextarea({
      rows={14}
      placeholder={placeholder}
      className={cn(
-      "w-full px-4 py-3 border-2 rounded-xl bg-slate-50/50 font-mono text-sm resize-none transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-500/20",
+      "w-full px-4 py-3 border-2 rounded-xl bg-slate-50/50 font-mono text-sm resize-none transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-500/20 text-black",
       error
        ? "border-red-300 focus:border-red-500"
        : "border-slate-200 focus:border-blue-500 hover:border-slate-300"
@@ -309,8 +309,8 @@ export default function DebugForm({
   setValue,
  } = useForm<FormData>();
 
- const watchedType = watch("type") || '';
- const watchedContent = watch("content") || '';
+ const watchedType = watch("type") || "";
+ const watchedContent = watch("content") || "";
 
  const handleFormSubmit = (data: FormData) => {
   onSubmit({
@@ -336,16 +336,10 @@ export default function DebugForm({
    <div className="bg-gradient-to-r from-slate-50 to-blue-50/30 px-8 py-6 border-b border-slate-200/50">
     <div className="flex items-center justify-between">
      <div className="flex items-center space-x-3">
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-500 to-purple-600 text-white shadow-lg">
-       <Zap className="h-5 w-5" />
-      </div>
       <div>
-       <h2 className="text-xl font-bold text-slate-900">
-        Submit Code for Analysis
+       <h2 className="text-2xl font-bold text-slate-900">
+        Enter code here
        </h2>
-       <p className="text-sm text-slate-600">
-        Intelligent debugging with context memory
-       </p>
       </div>
      </div>
 
