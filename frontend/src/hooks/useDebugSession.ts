@@ -22,6 +22,13 @@ export const useDebugSession = () => {
  const [error, setError] = useState<string | null>(null);
  const [contextSegments, setContextSegments] = useState<ContextSegment[]>([]);
 
+ const resetSession = useCallback(() => {
+  setCurrentSession(null);
+  setAnalysis(null);
+  setError(null);
+  setContextSegments([]);
+ }, []);
+
  const submitAnalysis = useCallback(
   async (data: DebugSessionData) => {
    setLoading(true);
@@ -91,5 +98,6 @@ export const useDebugSession = () => {
   contextSegments,
   submitAnalysis,
   loadSession,
+  resetSession,
  };
 };

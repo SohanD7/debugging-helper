@@ -264,6 +264,18 @@ export default function ContextViewer({
   loadSessions();
  }, []);
 
+ // Reload sessions when switching to 'history' tab
+ useEffect(() => {
+  if (activeTab === "history") {
+   loadSessions();
+  }
+ }, [activeTab]);
+
+ // Reload sessions when a new session is created
+ useEffect(() => {
+  loadSessions();
+ }, [sessionId]);
+
  const loadSessions = async () => {
   setLoadingSessions(true);
   try {

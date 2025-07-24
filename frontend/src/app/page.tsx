@@ -13,7 +13,7 @@ const containerVariants = {
  visible: {
   opacity: 1,
   transition: {
-    type: "spring" as const,
+   type: "spring" as const,
    delayChildren: 0.1,
    staggerChildren: 0.1,
   },
@@ -52,7 +52,6 @@ function HeroSection() {
  );
 }
 
-
 export default function Home() {
  const {
   currentSession,
@@ -62,6 +61,7 @@ export default function Home() {
   submitAnalysis,
   loadSession,
   contextSegments,
+  resetSession,
  } = useDebugSession();
 
  return (
@@ -80,6 +80,8 @@ export default function Home() {
       onSubmit={submitAnalysis}
       loading={loading}
       error={error}
+      currentSession={currentSession}
+      resetSession={resetSession}
      />
 
      {analysis && (
@@ -88,10 +90,7 @@ export default function Home() {
        animate={{ opacity: 1, y: 0 }}
        transition={{ duration: 0.5 }}
       >
-       <AnalysisDisplay
-        analysis={analysis}
-        sessionId={currentSession}
-       />
+       <AnalysisDisplay analysis={analysis} sessionId={currentSession} />
       </motion.div>
      )}
     </div>

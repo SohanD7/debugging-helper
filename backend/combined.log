@@ -13,3 +13,15 @@
 {"level":"info","message":"Created segment response_1753314641340 for session 86f03871-9361-4048-bccc-513f2b223085","service":"debugging-helper","timestamp":"2025-07-23T23:50:41.341Z"}
 {"level":"info","message":"Created segment error_1753314673170 for session 0d17b52b-af86-469f-8779-a6bfae68b576","service":"debugging-helper","timestamp":"2025-07-23T23:51:13.170Z"}
 {"level":"info","message":"Created segment response_1753314697129 for session 0d17b52b-af86-469f-8779-a6bfae68b576","service":"debugging-helper","timestamp":"2025-07-23T23:51:37.130Z"}
+{"level":"info","message":"Server running on port 3001","service":"debugging-helper","timestamp":"2025-07-24T00:31:43.162Z"}
+{"level":"info","message":"Created segment error_1753317126572 for session 3252bfdd-06c1-4c1a-a06d-760286082e7e","service":"debugging-helper","timestamp":"2025-07-24T00:32:06.573Z"}
+{"level":"info","message":"Created segment response_1753317157296 for session 3252bfdd-06c1-4c1a-a06d-760286082e7e","service":"debugging-helper","timestamp":"2025-07-24T00:32:37.296Z"}
+{"level":"info","message":"Server running on port 3001","service":"debugging-helper","timestamp":"2025-07-24T00:32:53.007Z"}
+{"level":"info","message":"Created segment error_1753317196211 for session 680ad999-6932-4998-9fb7-2f24d5a0a7f7","service":"debugging-helper","timestamp":"2025-07-24T00:33:16.211Z"}
+{"level":"info","message":"Created segment response_1753317217949 for session 680ad999-6932-4998-9fb7-2f24d5a0a7f7","service":"debugging-helper","timestamp":"2025-07-24T00:33:37.949Z"}
+{"level":"info","message":"Created segment diff_1753317239746 for session 1b775bf8-35b6-4e27-b85c-4756ad0900f0","service":"debugging-helper","timestamp":"2025-07-24T00:33:59.746Z"}
+{"level":"info","message":"Created segment response_1753317266216 for session 1b775bf8-35b6-4e27-b85c-4756ad0900f0","service":"debugging-helper","timestamp":"2025-07-24T00:34:26.216Z"}
+{"level":"info","message":"Created segment diff_1753317393889 for session 8adfae0a-daf1-4662-b0e3-727c6f6bcfd8","service":"debugging-helper","timestamp":"2025-07-24T00:36:33.890Z"}
+{"level":"info","message":"Created segment response_1753317415355 for session 8adfae0a-daf1-4662-b0e3-727c6f6bcfd8","service":"debugging-helper","timestamp":"2025-07-24T00:36:55.355Z"}
+{"level":"info","message":"Created segment diff_1753317423479 for session a3853639-5da7-4d75-ab0b-9ce5eab19120","service":"debugging-helper","timestamp":"2025-07-24T00:37:03.479Z"}
+{"level":"info","message":"Created segment response_1753317448877 for session a3853639-5da7-4d75-ab0b-9ce5eab19120","service":"debugging-helper","timestamp":"2025-07-24T00:37:28.878Z"}

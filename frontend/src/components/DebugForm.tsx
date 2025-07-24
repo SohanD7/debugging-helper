@@ -26,6 +26,8 @@ interface DebugFormProps {
  }) => void;
  loading: boolean;
  error?: string | null;
+ currentSession: string | null;
+ resetSession: () => void;
 }
 
 interface FormData {
@@ -298,8 +300,9 @@ export default function DebugForm({
  onSubmit,
  loading,
  error,
+ currentSession,
+ resetSession,
 }: DebugFormProps) {
- const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
  const {
   register,
   handleSubmit,
@@ -315,12 +318,12 @@ export default function DebugForm({
  const handleFormSubmit = (data: FormData) => {
   onSubmit({
    ...data,
-   sessionId: currentSessionId || undefined,
+   sessionId: undefined, // always start a new session unless switching
   });
  };
 
  const handleNewSession = () => {
-  setCurrentSessionId(null);
+  resetSession();
   reset();
   toast.success("New session started");
  };
@@ -337,22 +340,18 @@ export default function DebugForm({
     <div className="flex items-center justify-between">
      <div className="flex items-center space-x-3">
       <div>
-       <h2 className="text-2xl font-bold text-slate-900">
-        Enter code here
-       </h2>
+       <h2 className="text-2xl font-bold text-slate-900">Enter code here</h2>
       </div>
      </div>
 
-     {currentSessionId && (
-      <motion.button
-       whileHover={{ scale: 1.05 }}
-       whileTap={{ scale: 0.95 }}
-       onClick={handleNewSession}
-       className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg transition-colors shadow-sm"
-      >
-       New Session
-      </motion.button>
-     )}
+     <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={handleNewSession}
+      className="px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-200 rounded-lg transition-colors shadow-sm"
+     >
+      New Session
+     </motion.button>
     </div>
    </div>
 
@@ -385,7 +384,7 @@ export default function DebugForm({
 
     {/* Session Info */}
     <AnimatePresence>
-     {currentSessionId && (
+     {currentSession && (
       <motion.div
        initial={{ opacity: 0, height: 0 }}
        animate={{ opacity: 1, height: "auto" }}
@@ -396,7 +395,7 @@ export default function DebugForm({
         <div className="h-2 w-2 rounded-full bg-blue-500"></div>
         <p className="text-sm font-medium text-blue-900">
          Current Session:{" "}
-         <span className="font-mono text-blue-700">{currentSessionId}</span>
+         <span className="font-mono text-blue-700">{currentSession}</span>
         </p>
        </div>
       </motion.div>
