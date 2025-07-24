@@ -112,7 +112,9 @@ function SessionCard({
      <div className="flex items-center space-x-3 text-xs text-slate-500">
       <span>{session.segmentCount} segments</span>
       <span>
-       {formatDistanceToNow(new Date(session.createdAt), { addSuffix: true })}
+       {session.createdAt
+        ? formatDistanceToNow(new Date(session.createdAt), { addSuffix: true })
+        : "Unknown"}
       </span>
      </div>
     </div>
@@ -202,9 +204,11 @@ function SegmentTimeline({ segments }: { segments: ContextSegment[] }) {
           <div className="flex items-center space-x-2">
            <Clock className="h-3 w-3 text-slate-400" />
            <span className="text-xs text-slate-500">
-            {formatDistanceToNow(new Date(segment.timestamp), {
-             addSuffix: true,
-            })}
+            {segment.timestamp
+             ? formatDistanceToNow(new Date(segment.timestamp), {
+                addSuffix: true,
+               })
+             : "Unknown"}
            </span>
            {isExpanded ? (
             <EyeOff className="h-4 w-4 text-slate-400" />
@@ -219,7 +223,12 @@ function SegmentTimeline({ segments }: { segments: ContextSegment[] }) {
            "AI analysis completed"
           ) : (
            <span className="font-mono text-xs bg-white/50 px-2 py-1 rounded">
-            {JSON.stringify(segment.content).substring(0, 60)}...
+            {segment.content && typeof segment.content === "string"
+             ? segment.content.substring(0, 60)
+             : segment.content && typeof segment.content === "object"
+             ? JSON.stringify(segment.content).substring(0, 60)
+             : "No content"}
+            ...
            </span>
           )}
          </div>
@@ -289,6 +298,26 @@ export default function ContextViewer({
    console.error("Error loading sessions:", error);
   } finally {
    setLoadingSessions(false);
+  }
+ };
+
+ // Handler to clear all sessions
+ const handleClearAllSessions = async () => {
+  if (
+   !window.confirm(
+    "Are you sure you want to delete all sessions? This cannot be undone."
+   )
+  )
+   return;
+  try {
+   const response = await fetch("/api/history/sessions", { method: "DELETE" });
+   if (response.ok) {
+    loadSessions();
+   } else {
+    alert("Failed to delete all sessions.");
+   }
+  } catch (e) {
+   alert("Error deleting sessions.");
   }
  };
 
@@ -421,6 +450,16 @@ export default function ContextViewer({
          <p className="text-xs text-slate-400 mt-1">
           Start your first analysis to create history
          </p>
+        </div>
+       )}
+       {activeTab === "history" && (
+        <div className="flex justify-end mb-4">
+         <button
+          onClick={handleClearAllSessions}
+          className="px-4 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 rounded-lg transition-colors shadow-sm"
+         >
+          Clear All Sessions
+         </button>
         </div>
        )}
       </motion.div>
