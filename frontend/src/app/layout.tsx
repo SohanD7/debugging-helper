@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Terminal, Brain, Github, Settings } from "lucide-react";
 import "./globals.css";
 
+
 function StatusBar() {
  return (
   <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200/80 bg-slate-50/95 backdrop-blur supports-[backdrop-filter]:bg-slate-50/95">

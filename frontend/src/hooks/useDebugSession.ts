@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { API_URL } from "@/config";
 
 interface DebugSessionData {
  type: string;
@@ -37,7 +38,7 @@ export const useDebugSession = () => {
    try {
     const sessionId = data.sessionId || uuidv4();
 
-    const response = await fetch("/api/debug/analyze", {
+    const response = await fetch(`${API_URL}/api/debug/analyze`, {
      method: "POST",
      headers: {
       "Content-Type": "application/json",
@@ -73,7 +74,7 @@ export const useDebugSession = () => {
   setError(null);
 
   try {
-   const response = await fetch(`/api/debug/session/${sessionId}`);
+   const response = await fetch(`${API_URL}/api/debug/session/${sessionId}`);
    const result = await response.json();
 
    if (result.success) {
