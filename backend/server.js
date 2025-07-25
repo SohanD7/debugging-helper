@@ -14,14 +14,30 @@ import { logger } from "./src/utils/logger.js";
 const app = express();
 const PORT = process.env.PORT || 3001;3
 
+const allowedOrigins = [
+ "https://debugging-helper.vercel.app",
+ "http://localhost:3000", // for local dev
+ "https://debugging-helper-backend.onrender.com",
+];
+
+const corsOptions = {
+ origin: (incomingOrigin, callback) => {
+  // If no Origin header (e.g., Postman) or it's in allowedOrigins, allow
+  if (!incomingOrigin || allowedOrigins.includes(incomingOrigin)) {
+   callback(null, true);
+  } else {
+   callback(new Error(`Origin ${incomingOrigin} not allowed by CORS`));
+  }
+ },
+ credentials: true, // if you send cookies/auth headers
+ methods: ["GET", "POST", "OPTIONS", "PUT", "PATCH", "DELETE"],
+ allowedHeaders: ["Content-Type", "Authorization"],
+};
+
 // Security middleware
 app.use(helmet());
-app.use(
- cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:3000",
-  credentials: true,
- })
-);
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 // Rate limiting
 const limiter = rateLimit({
