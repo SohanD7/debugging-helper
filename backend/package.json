@@ -4,6 +4,7 @@
  "type": "module",
  "main": "server.js",
  "scripts": {
+  "predeploy": "rm -rf prisma/migrations && rm -f prisma/migration_lock.toml &&  npx prisma migrate dev --name init",
   "start": "npx prisma generate --schema=../prisma/schema.prisma && node server.js",
   "prisma:generate": "prisma generate",
   "build": "npm run prisma:generate",
