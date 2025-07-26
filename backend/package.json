@@ -6,7 +6,7 @@
  "scripts": {
   "start": "npx prisma generate --schema=../prisma/schema.prisma && npx prisma migrate deploy --schema=../prisma/schema.prisma && node server.js",
   "prisma:generate": "prisma generate",
-  "build": "npx prisma generate --schema=../prisma/schema.prisma",
+  "build": "echo 'Build completed'",
   "dev": "nodemon server.js",
   "test": "jest",
   "postinstall": "npx prisma generate --schema=../prisma/schema.prisma"

@@ -20,6 +20,7 @@ import { formatDistanceToNow } from "date-fns";
 import { cn } from "@/lib/utils";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { getApiUrl } from "@/config";
 
 interface ContextSegment {
  id: string;
@@ -60,6 +61,14 @@ const segmentConfig = {
   bgColor: "bg-green-50",
   borderColor: "border-green-200",
   dotColor: "bg-green-500",
+ },
+ commit: {
+  icon: GitBranch,
+  label: "Commit Message",
+  color: "text-purple-600",
+  bgColor: "bg-purple-50",
+  borderColor: "border-purple-200",
+  dotColor: "bg-purple-500",
  },
 };
 
@@ -288,11 +297,21 @@ export default function ContextViewer({
  const loadSessions = async () => {
   setLoadingSessions(true);
   try {
-   // Simulated API call - replace with actual API call
-   const response = await fetch("/api/history/sessions");
+   const apiUrl = getApiUrl();
+   const url = apiUrl
+    ? `${apiUrl}/api/history/sessions`
+    : "/api/history/sessions";
+   console.log("Loading sessions from:", url);
+   const response = await fetch(url);
+   console.log("Sessions response status:", response.status);
+
    if (response.ok) {
     const data = await response.json();
+    console.log("Sessions data:", data);
     setSessions(data.sessions || []);
+   } else {
+    const errorText = await response.text();
+    console.error("Failed to load sessions:", response.status, errorText);
    }
   } catch (error) {
    console.error("Error loading sessions:", error);
@@ -310,7 +329,11 @@ export default function ContextViewer({
   )
    return;
   try {
-   const response = await fetch("/api/history/sessions", { method: "DELETE" });
+   const apiUrl = getApiUrl();
+   const url = apiUrl
+    ? `${apiUrl}/api/history/sessions`
+    : "/api/history/sessions";
+   const response = await fetch(url, { method: "DELETE" });
    if (response.ok) {
     loadSessions();
    } else {

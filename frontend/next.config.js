@@ -8,7 +8,7 @@ const nextConfig = {
   return [
    {
     source: "/api/:path*",
-    destination: "http://localhost:3001/api/:path*", // Proxy to backend
+    destination: "https://debugging-helper-backend.onrender.com/api/:path*", // Proxy to Render backend
    },
   ];
  },

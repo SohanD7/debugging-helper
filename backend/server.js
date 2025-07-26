@@ -34,19 +34,25 @@ if (
 logger.info(`Allowed origins: ${allowedOrigins.join(", ")}`);
 
 const corsOptions = {
- origin: (incomingOrigin, callback) => {
-  logger.info(`Incoming request from origin: ${incomingOrigin}`);
+ origin: function (origin, callback) {
+  logger.info(`Incoming request from origin: ${origin}`);
 
-  // If no Origin header (e.g., Postman) or it's in allowedOrigins, allow
-  if (!incomingOrigin || allowedOrigins.includes(incomingOrigin)) {
-   logger.info(`Origin ${incomingOrigin} allowed`);
-   callback(null, true);
-  } else {
-   logger.warn(`Origin ${incomingOrigin} not allowed by CORS`);
-   callback(new Error(`Origin ${incomingOrigin} not allowed by CORS`));
+  // Allow requests with no origin (like mobile apps or curl requests)
+  if (!origin) {
+   logger.info(`Origin ${origin} allowed (no origin)`);
+   return callback(null, true);
   }
+
+  // Check if origin is in allowed list
+  if (allowedOrigins.includes(origin)) {
+   logger.info(`Origin ${origin} allowed`);
+   return callback(null, true);
+  }
+
+  logger.warn(`Origin ${origin} not allowed by CORS`);
+  return callback(new Error(`Origin ${origin} not allowed by CORS`));
  },
- credentials: true, // if you send cookies/auth headers
+ credentials: true,
  methods: ["GET", "POST", "OPTIONS", "PUT", "PATCH", "DELETE"],
  allowedHeaders: ["Content-Type", "Authorization"],
 };

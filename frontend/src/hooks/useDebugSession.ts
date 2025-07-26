@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { API_URL } from "@/config";
+import { getApiUrl } from "@/config";
 
 interface DebugSessionData {
  type: string;
@@ -36,11 +36,14 @@ export const useDebugSession = () => {
    setError(null);
 
    try {
-    const sessionId = data.sessionId || uuidv4();
-    const url = `${API_URL}/api/debug/analyze`;
+    // Use existing sessionId if provided, otherwise use current session or generate new one
+    const sessionId = data.sessionId || currentSession || uuidv4();
+    const apiUrl = getApiUrl();
+    const url = apiUrl ? `${apiUrl}/api/debug/analyze` : "/api/debug/analyze";
 
     console.log("Making request to:", url);
-    console.log("API_URL:", API_URL);
+    console.log("API_URL:", apiUrl);
+    console.log("Using sessionId:", sessionId);
 
     const response = await fetch(url, {
      method: "POST",
@@ -77,7 +80,7 @@ export const useDebugSession = () => {
     setLoading(false);
    }
   },
-  [contextSegments]
+  [contextSegments, currentSession]
  );
 
  const loadSession = useCallback(async (sessionId: string) => {
@@ -85,7 +88,11 @@ export const useDebugSession = () => {
   setError(null);
 
   try {
-   const response = await fetch(`${API_URL}/api/debug/session/${sessionId}`);
+   const apiUrl = getApiUrl();
+   const url = apiUrl
+    ? `${apiUrl}/api/debug/session/${sessionId}`
+    : `/api/debug/session/${sessionId}`;
+   const response = await fetch(url);
    const result = await response.json();
 
    if (result.success) {
