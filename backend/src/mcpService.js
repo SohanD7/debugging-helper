@@ -5,15 +5,34 @@ import { ContextManager } from "./contextManager.js";
 
 class MCPService {
  constructor() {
-  this.openai = new OpenAI({
-   apiKey: process.env.OPENAI_API_KEY,
-  });
-  this.contextManager = new ContextManager();
-  this.server = new McpServer({
-   name: "debugging-helper",
-   version: "1.0.0",
-  });
-  this.setupTools();
+  try {
+   logger.info("Initializing MCPService");
+
+   if (!process.env.OPENAI_API_KEY) {
+    throw new Error("OPENAI_API_KEY is not set");
+   }
+
+   this.openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+   });
+
+   logger.info("OpenAI client initialized");
+
+   this.contextManager = new ContextManager();
+   logger.info("ContextManager initialized");
+
+   this.server = new McpServer({
+    name: "debugging-helper",
+    version: "1.0.0",
+   });
+
+   logger.info("McpServer initialized");
+   this.setupTools();
+   logger.info("MCPService initialization completed");
+  } catch (error) {
+   logger.error("Error initializing MCPService:", error);
+   throw error;
+  }
  }
 
  setupTools() {

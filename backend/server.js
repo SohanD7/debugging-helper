@@ -1,4 +1,4 @@
-import './src/config/env.js'; // Load environment variables and configurations
+import "./src/config/env.js"; // Load environment variables and configurations
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -9,10 +9,13 @@ import historyRoutes from "./src/routes/history.js";
 import { errorHandler } from "./src/errorHandler.js";
 import { logger } from "./src/utils/logger.js";
 
-
-
 const app = express();
-const PORT = process.env.PORT || 3001;3
+const PORT = process.env.PORT || 3001;
+
+// Log environment info
+logger.info(`Starting server on port ${PORT}`);
+logger.info(`NODE_ENV: ${process.env.NODE_ENV}`);
+logger.info(`FRONTEND_URL: ${process.env.FRONTEND_URL}`);
 
 const allowedOrigins = [
  "https://debugging-helper.vercel.app",
@@ -20,12 +23,26 @@ const allowedOrigins = [
  "https://debugging-helper-backend.onrender.com",
 ];
 
+// Add FRONTEND_URL to allowed origins if it exists
+if (
+ process.env.FRONTEND_URL &&
+ !allowedOrigins.includes(process.env.FRONTEND_URL)
+) {
+ allowedOrigins.push(process.env.FRONTEND_URL);
+}
+
+logger.info(`Allowed origins: ${allowedOrigins.join(", ")}`);
+
 const corsOptions = {
  origin: (incomingOrigin, callback) => {
+  logger.info(`Incoming request from origin: ${incomingOrigin}`);
+
   // If no Origin header (e.g., Postman) or it's in allowedOrigins, allow
   if (!incomingOrigin || allowedOrigins.includes(incomingOrigin)) {
+   logger.info(`Origin ${incomingOrigin} allowed`);
    callback(null, true);
   } else {
+   logger.warn(`Origin ${incomingOrigin} not allowed by CORS`);
    callback(new Error(`Origin ${incomingOrigin} not allowed by CORS`));
   }
  },
@@ -50,6 +67,14 @@ app.use(limiter);
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
+// Request logging middleware
+app.use((req, res, next) => {
+ logger.info(
+  `${req.method} ${req.path} - Origin: ${req.get("Origin") || "No Origin"}`
+ );
+ next();
+});
+
 // Routes
 app.use("/api/debug", debugRoutes);
 app.use("/api/context", contextRoutes);
@@ -57,7 +82,22 @@ app.use("/api/history", historyRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {
- res.json({ status: "healthy", timestamp: new Date().toISOString() });
+ logger.info("Health check requested");
+ res.json({
+  status: "healthy",
+  timestamp: new Date().toISOString(),
+  environment: process.env.NODE_ENV,
+  allowedOrigins,
+ });
+});
+
+// Root route for debugging
+app.get("/", (req, res) => {
+ res.json({
+  message: "Backend API is running",
+  endpoints: ["/api/debug", "/api/context", "/api/history", "/api/health"],
+  timestamp: new Date().toISOString(),
+ });
 });
 
 // Error handling
@@ -65,6 +105,7 @@ app.use(errorHandler);
 
 app.listen(PORT, () => {
  logger.info(`Server running on port ${PORT}`);
+ logger.info(`Health check available at: http://localhost:${PORT}/api/health`);
 });
 
 export default app;

@@ -11,35 +11,44 @@ export class ContextManager {
   timestamp,
   references = [],
  }) {
-  // Ensure session exists or create it
-  let session = await prisma.session.findUnique({ where: { id: sessionId } });
-  if (!session) {
-   session = await prisma.session.create({
+  try {
+   logger.info(`Creating segment for session ${sessionId}`, { type, id });
+
+   // Ensure session exists or create it
+   let session = await prisma.session.findUnique({ where: { id: sessionId } });
+   if (!session) {
+    logger.info(`Creating new session ${sessionId}`);
+    session = await prisma.session.create({
+     data: {
+      id: sessionId,
+      createdAt: timestamp ? new Date(timestamp) : new Date(),
+      lastActivity: new Date(),
+     },
+    });
+   } else {
+    logger.info(`Updating existing session ${sessionId}`);
+    await prisma.session.update({
+     where: { id: sessionId },
+     data: { lastActivity: new Date() },
+    });
+   }
+
+   const segment = await prisma.segment.create({
     data: {
-     id: sessionId,
-     createdAt: timestamp ? new Date(timestamp) : new Date(),
-     lastActivity: new Date(),
+     id: id || uuidv4(),
+     type,
+     content,
+     sessionId,
+     timestamp: timestamp ? new Date(timestamp) : new Date(),
+     references: references.length > 0 ? JSON.stringify(references) : null,
     },
    });
-  } else {
-   await prisma.session.update({
-    where: { id: sessionId },
-    data: { lastActivity: new Date() },
-   });
+   logger.info(`Created segment ${segment.id} for session ${sessionId}`);
+   return segment;
+  } catch (error) {
+   logger.error(`Error creating segment for session ${sessionId}:`, error);
+   throw error;
   }
-
-  const segment = await prisma.segment.create({
-   data: {
-    id: id || uuidv4(),
-    type,
-    content,
-    sessionId,
-    timestamp: timestamp ? new Date(timestamp) : new Date(),
-    references: references.length > 0 ? JSON.stringify(references) : null,
-   },
-  });
-  logger.info(`Created segment ${segment.id} for session ${sessionId}`);
-  return segment;
  }
 
  async getSegment(segmentId) {

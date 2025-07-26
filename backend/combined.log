@@ -43,3 +43,140 @@
 {"level":"info","message":"Created segment response_1753321741448 for session 74cc71e7-81e7-4f61-bf87-e2a6824e0e72","service":"debugging-helper","timestamp":"2025-07-24T01:49:01.461Z"}
 {"level":"info","message":"Server running on port 3001","service":"debugging-helper","timestamp":"2025-07-24T01:49:37.231Z"}
 {"level":"info","message":"Server running on port 3001","service":"debugging-helper","timestamp":"2025-07-24T01:51:16.917Z"}
+{"level":"info","message":"Initializing MCPService","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.671Z"}
+{"level":"info","message":"OpenAI client initialized","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.673Z"}
+{"level":"info","message":"ContextManager initialized","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.674Z"}
+{"level":"info","message":"McpServer initialized","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.674Z"}
+{"level":"info","message":"MCPService initialization completed","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.674Z"}
+{"level":"info","message":"Initializing MCPService","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.675Z"}
+{"level":"info","message":"OpenAI client initialized","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.675Z"}
+{"level":"info","message":"ContextManager initialized","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.675Z"}
+{"level":"info","message":"McpServer initialized","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.675Z"}
+{"level":"info","message":"MCPService initialization completed","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.675Z"}
+{"level":"info","message":"Initializing MCPService","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.675Z"}
+{"level":"info","message":"OpenAI client initialized","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.675Z"}
+{"level":"info","message":"ContextManager initialized","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.676Z"}
+{"level":"info","message":"McpServer initialized","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.676Z"}
+{"level":"info","message":"MCPService initialization completed","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.676Z"}
+{"level":"info","message":"Starting server on port 3001","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.676Z"}
+{"level":"info","message":"NODE_ENV: development","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.676Z"}
+{"level":"info","message":"FRONTEND_URL: http://localhost:3000","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.676Z"}
+{"level":"info","message":"Allowed origins: https://debugging-helper.vercel.app, http://localhost:3000, https://debugging-helper-backend.onrender.com","service":"debugging-helper","timestamp":"2025-07-26T01:05:29.676Z"}
+{"level":"info","message":"Server running on port 3001","service":"debugging-helper","timestamp":"2025-07-26T01:05:30.131Z"}
+{"level":"info","message":"Health check available at: http://localhost:3001/api/health","service":"debugging-helper","timestamp":"2025-07-26T01:05:30.131Z"}
+{"level":"info","message":"Incoming request from origin: undefined","service":"debugging-helper","timestamp":"2025-07-26T01:05:58.123Z"}
+{"level":"info","message":"Origin undefined allowed","service":"debugging-helper","timestamp":"2025-07-26T01:05:58.124Z"}
+{"level":"info","message":"GET /api/health - Origin: No Origin","service":"debugging-helper","timestamp":"2025-07-26T01:05:58.127Z"}
+{"level":"info","message":"Health check requested","service":"debugging-helper","timestamp":"2025-07-26T01:05:58.128Z"}
+{"level":"info","message":"Incoming request from origin: undefined","service":"debugging-helper","timestamp":"2025-07-26T01:06:37.066Z"}
+{"level":"info","message":"Origin undefined allowed","service":"debugging-helper","timestamp":"2025-07-26T01:06:37.067Z"}
+{"level":"info","message":"POST /api/debug/analyze - Origin: No Origin","service":"debugging-helper","timestamp":"2025-07-26T01:06:37.075Z"}
+{"contentLength":12,"level":"info","message":"Received analyze request","service":"debugging-helper","sessionId":"test-123","timestamp":"2025-07-26T01:06:37.075Z","type":"diff"}
+{"level":"info","message":"Analyzing diff","service":"debugging-helper","timestamp":"2025-07-26T01:06:37.075Z"}
+{"id":"diff_1753491997075","level":"info","message":"Creating segment for session test-123","service":"debugging-helper","timestamp":"2025-07-26T01:06:37.075Z","type":"git_diff"}
+{"level":"info","message":"Initializing MCPService","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.855Z"}
+{"level":"info","message":"OpenAI client initialized","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.857Z"}
+{"level":"info","message":"ContextManager initialized","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.857Z"}
+{"level":"info","message":"McpServer initialized","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.857Z"}
+{"level":"info","message":"MCPService initialization completed","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.858Z"}
+{"level":"info","message":"Initializing MCPService","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.858Z"}
+{"level":"info","message":"OpenAI client initialized","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.858Z"}
+{"level":"info","message":"ContextManager initialized","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.858Z"}
+{"level":"info","message":"McpServer initialized","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.858Z"}
+{"level":"info","message":"MCPService initialization completed","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.859Z"}
+{"level":"info","message":"Initializing MCPService","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.859Z"}
+{"level":"info","message":"OpenAI client initialized","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.859Z"}
+{"level":"info","message":"ContextManager initialized","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.859Z"}
+{"level":"info","message":"McpServer initialized","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.859Z"}
+{"level":"info","message":"MCPService initialization completed","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.859Z"}
+{"level":"info","message":"Starting server on port 3001","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.859Z"}
+{"level":"info","message":"NODE_ENV: development","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.859Z"}
+{"level":"info","message":"FRONTEND_URL: http://localhost:3000","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.859Z"}
+{"level":"info","message":"Allowed origins: https://debugging-helper.vercel.app, http://localhost:3000, https://debugging-helper-backend.onrender.com","service":"debugging-helper","timestamp":"2025-07-26T01:08:55.859Z"}
+{"level":"info","message":"Server running on port 3001","service":"debugging-helper","timestamp":"2025-07-26T01:08:56.160Z"}
+{"level":"info","message":"Health check available at: http://localhost:3001/api/health","service":"debugging-helper","timestamp":"2025-07-26T01:08:56.160Z"}
+{"level":"info","message":"Initializing MCPService","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.944Z"}
+{"level":"info","message":"OpenAI client initialized","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.946Z"}
+{"level":"info","message":"ContextManager initialized","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.947Z"}
+{"level":"info","message":"McpServer initialized","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.947Z"}
+{"level":"info","message":"MCPService initialization completed","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.947Z"}
+{"level":"info","message":"Initializing MCPService","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.948Z"}
+{"level":"info","message":"OpenAI client initialized","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.948Z"}
+{"level":"info","message":"ContextManager initialized","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.948Z"}
+{"level":"info","message":"McpServer initialized","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.948Z"}
+{"level":"info","message":"MCPService initialization completed","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.948Z"}
+{"level":"info","message":"Initializing MCPService","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.948Z"}
+{"level":"info","message":"OpenAI client initialized","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.948Z"}
+{"level":"info","message":"ContextManager initialized","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.948Z"}
+{"level":"info","message":"McpServer initialized","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.948Z"}
+{"level":"info","message":"MCPService initialization completed","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.949Z"}
+{"level":"info","message":"Starting server on port 3001","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.949Z"}
+{"level":"info","message":"NODE_ENV: development","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.949Z"}
+{"level":"info","message":"FRONTEND_URL: http://localhost:3000","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.949Z"}
+{"level":"info","message":"Allowed origins: https://debugging-helper.vercel.app, http://localhost:3000, https://debugging-helper-backend.onrender.com","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.949Z"}
+{"level":"info","message":"Server running on port 3001","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.970Z"}
+{"level":"info","message":"Health check available at: http://localhost:3001/api/health","service":"debugging-helper","timestamp":"2025-07-26T01:12:51.970Z"}
+{"level":"info","message":"Incoming request from origin: undefined","service":"debugging-helper","timestamp":"2025-07-26T01:12:58.078Z"}
+{"level":"info","message":"Origin undefined allowed","service":"debugging-helper","timestamp":"2025-07-26T01:12:58.078Z"}
+{"level":"info","message":"POST /api/debug/analyze - Origin: No Origin","service":"debugging-helper","timestamp":"2025-07-26T01:12:58.087Z"}
+{"contentLength":12,"level":"info","message":"Received analyze request","service":"debugging-helper","sessionId":"test-123","timestamp":"2025-07-26T01:12:58.088Z","type":"diff"}
+{"level":"info","message":"Analyzing diff","service":"debugging-helper","timestamp":"2025-07-26T01:12:58.088Z"}
+{"id":"diff_1753492378088","level":"info","message":"Creating segment for session test-123","service":"debugging-helper","timestamp":"2025-07-26T01:12:58.088Z","type":"git_diff"}
+{"level":"info","message":"Initializing MCPService","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.976Z"}
+{"level":"info","message":"OpenAI client initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.983Z"}
+{"level":"info","message":"ContextManager initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.983Z"}
+{"level":"info","message":"McpServer initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.986Z"}
+{"level":"info","message":"MCPService initialization completed","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.987Z"}
+{"level":"info","message":"Initializing MCPService","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.988Z"}
+{"level":"info","message":"OpenAI client initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.988Z"}
+{"level":"info","message":"ContextManager initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.988Z"}
+{"level":"info","message":"McpServer initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.988Z"}
+{"level":"info","message":"MCPService initialization completed","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.988Z"}
+{"level":"info","message":"Initializing MCPService","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.988Z"}
+{"level":"info","message":"OpenAI client initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.988Z"}
+{"level":"info","message":"ContextManager initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.989Z"}
+{"level":"info","message":"McpServer initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.989Z"}
+{"level":"info","message":"MCPService initialization completed","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.989Z"}
+{"level":"info","message":"Starting server on port 3001","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.989Z"}
+{"level":"info","message":"NODE_ENV: development","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.989Z"}
+{"level":"info","message":"FRONTEND_URL: http://localhost:3000","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.989Z"}
+{"level":"info","message":"Allowed origins: https://debugging-helper.vercel.app, http://localhost:3000, https://debugging-helper-backend.onrender.com","service":"debugging-helper","timestamp":"2025-07-26T01:16:00.989Z"}
+{"level":"info","message":"Server running on port 3001","service":"debugging-helper","timestamp":"2025-07-26T01:16:01.011Z"}
+{"level":"info","message":"Health check available at: http://localhost:3001/api/health","service":"debugging-helper","timestamp":"2025-07-26T01:16:01.011Z"}
+{"level":"info","message":"Initializing MCPService","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.770Z"}
+{"level":"info","message":"OpenAI client initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.772Z"}
+{"level":"info","message":"ContextManager initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.773Z"}
+{"level":"info","message":"McpServer initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.773Z"}
+{"level":"info","message":"MCPService initialization completed","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.773Z"}
+{"level":"info","message":"Initializing MCPService","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.774Z"}
+{"level":"info","message":"OpenAI client initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.774Z"}
+{"level":"info","message":"ContextManager initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.774Z"}
+{"level":"info","message":"McpServer initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.774Z"}
+{"level":"info","message":"MCPService initialization completed","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.774Z"}
+{"level":"info","message":"Initializing MCPService","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.775Z"}
+{"level":"info","message":"OpenAI client initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.775Z"}
+{"level":"info","message":"ContextManager initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.775Z"}
+{"level":"info","message":"McpServer initialized","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.775Z"}
+{"level":"info","message":"MCPService initialization completed","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.775Z"}
+{"level":"info","message":"Starting server on port 3001","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.775Z"}
+{"level":"info","message":"NODE_ENV: development","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.775Z"}
+{"level":"info","message":"FRONTEND_URL: http://localhost:3000","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.775Z"}
+{"level":"info","message":"Allowed origins: https://debugging-helper.vercel.app, http://localhost:3000, https://debugging-helper-backend.onrender.com","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.775Z"}
+{"level":"info","message":"Server running on port 3001","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.795Z"}
+{"level":"info","message":"Health check available at: http://localhost:3001/api/health","service":"debugging-helper","timestamp":"2025-07-26T01:16:34.795Z"}
+{"level":"info","message":"Incoming request from origin: undefined","service":"debugging-helper","timestamp":"2025-07-26T01:16:41.137Z"}
+{"level":"info","message":"Origin undefined allowed","service":"debugging-helper","timestamp":"2025-07-26T01:16:41.137Z"}
+{"level":"info","message":"GET /api/health - Origin: No Origin","service":"debugging-helper","timestamp":"2025-07-26T01:16:41.140Z"}
+{"level":"info","message":"Health check requested","service":"debugging-helper","timestamp":"2025-07-26T01:16:41.141Z"}
+{"level":"info","message":"Incoming request from origin: undefined","service":"debugging-helper","timestamp":"2025-07-26T01:16:45.857Z"}
+{"level":"info","message":"Origin undefined allowed","service":"debugging-helper","timestamp":"2025-07-26T01:16:45.858Z"}
+{"level":"info","message":"POST /api/debug/analyze - Origin: No Origin","service":"debugging-helper","timestamp":"2025-07-26T01:16:45.864Z"}
+{"contentLength":12,"level":"info","message":"Received analyze request","service":"debugging-helper","sessionId":"test-123","timestamp":"2025-07-26T01:16:45.865Z","type":"diff"}
+{"level":"info","message":"Analyzing diff","service":"debugging-helper","timestamp":"2025-07-26T01:16:45.865Z"}
+{"id":"diff_1753492605865","level":"info","message":"Creating segment for session test-123","service":"debugging-helper","timestamp":"2025-07-26T01:16:45.865Z","type":"git_diff"}
+{"level":"info","message":"Creating new session test-123","service":"debugging-helper","timestamp":"2025-07-26T01:16:46.604Z"}
+{"level":"info","message":"Created segment diff_1753492605865 for session test-123","service":"debugging-helper","timestamp":"2025-07-26T01:16:46.761Z"}
+{"id":"response_1753492629461","level":"info","message":"Creating segment for session test-123","service":"debugging-helper","timestamp":"2025-07-26T01:17:09.461Z","type":"ai_analysis"}
+{"level":"info","message":"Analysis completed successfully","service":"debugging-helper","sessionId":"test-123","timestamp":"2025-07-26T01:17:09.462Z"}
+{"level":"info","message":"Updating existing session test-123","service":"debugging-helper","timestamp":"2025-07-26T01:17:09.546Z"}
+{"level":"info","message":"Created segment response_1753492629461 for session test-123","service":"debugging-helper","timestamp":"2025-07-26T01:17:09.665Z"}

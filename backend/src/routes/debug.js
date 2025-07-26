@@ -9,6 +9,12 @@ const mcpService = new MCPService();
 // Analyze code input (diff, stack trace, or commit message)
 router.post("/analyze", async (req, res) => {
  try {
+  logger.info("Received analyze request", {
+   type: req.body.type,
+   sessionId: req.body.sessionId,
+   contentLength: req.body.content?.length || 0,
+  });
+
   const {
    type,
    content,
@@ -17,6 +23,7 @@ router.post("/analyze", async (req, res) => {
   } = req.body;
 
   if (!type || !content) {
+   logger.warn("Missing required fields", { type, hasContent: !!content });
    return res.status(400).json({ error: "Type and content are required" });
   }
 
@@ -24,9 +31,11 @@ router.post("/analyze", async (req, res) => {
 
   switch (type) {
    case "diff":
+    logger.info("Analyzing diff");
     result = await mcpService.analyzeDiff(content, sessionId, contextSegments);
     break;
    case "stacktrace":
+    logger.info("Analyzing stack trace");
     result = await mcpService.analyzeStackTrace(
      content,
      sessionId,
@@ -34,14 +43,20 @@ router.post("/analyze", async (req, res) => {
     );
     break;
    case "commit":
+    logger.info("Analyzing commit message");
     // Treat commit messages as diffs for now
     result = await mcpService.analyzeDiff(content, sessionId, contextSegments);
     break;
    default:
+    logger.warn("Invalid type provided", { type });
     return res
      .status(400)
      .json({ error: "Invalid type. Use: diff, stacktrace, or commit" });
   }
+
+  logger.info("Analysis completed successfully", {
+   sessionId: result.sessionId,
+  });
 
   res.json({
    success: true,
@@ -52,7 +67,16 @@ router.post("/analyze", async (req, res) => {
   });
  } catch (error) {
   logger.error("Error in /analyze:", error);
-  res.status(500).json({ error: "Internal server error" });
+  logger.error("Error stack:", error.stack);
+  logger.error("Error details:", {
+   message: error.message,
+   name: error.name,
+   code: error.code,
+  });
+  res.status(500).json({
+   error: "Internal server error",
+   details: process.env.NODE_ENV === "development" ? error.message : undefined,
+  });
  }
 });
 

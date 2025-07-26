@@ -4,10 +4,9 @@
  "type": "module",
  "main": "server.js",
  "scripts": {
-  "predeploy": "rm -rf prisma/migrations && rm -f prisma/migration_lock.toml &&  npx prisma migrate dev --name init",
-  "start": "npx prisma generate --schema=../prisma/schema.prisma && node server.js",
+  "start": "npx prisma generate --schema=../prisma/schema.prisma && npx prisma migrate deploy --schema=../prisma/schema.prisma && node server.js",
   "prisma:generate": "prisma generate",
-  "build": "rm -rf prisma/migrations && rm -f prisma/migration_lock.toml && npx prisma migrate dev --name init && npm run prisma:generate",
+  "build": "npx prisma generate --schema=../prisma/schema.prisma",
   "dev": "nodemon server.js",
   "test": "jest",
   "postinstall": "npx prisma generate --schema=../prisma/schema.prisma"
@@ -23,7 +22,6 @@
   "openai": "^4.0.0",
   "parse-git-diff": "^0.0.19",
   "prisma": "^6.12.0",
-  "sqlite3": "^5.1.7",
   "uuid": "^9.0.0",
   "winston": "^3.10.0"
  },

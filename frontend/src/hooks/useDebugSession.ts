@@ -37,8 +37,12 @@ export const useDebugSession = () => {
 
    try {
     const sessionId = data.sessionId || uuidv4();
+    const url = `${API_URL}/api/debug/analyze`;
 
-    const response = await fetch(`${API_URL}/api/debug/analyze`, {
+    console.log("Making request to:", url);
+    console.log("API_URL:", API_URL);
+
+    const response = await fetch(url, {
      method: "POST",
      headers: {
       "Content-Type": "application/json",
@@ -51,6 +55,12 @@ export const useDebugSession = () => {
      }),
     });
 
+    if (!response.ok) {
+     const errorText = await response.text();
+     console.error("Response not ok:", response.status, errorText);
+     throw new Error(`HTTP ${response.status}: ${errorText}`);
+    }
+
     const result = await response.json();
 
     if (result.success) {
@@ -61,7 +71,8 @@ export const useDebugSession = () => {
      setError(result.error || "Analysis failed");
     }
    } catch (err) {
-    setError("Network error occurred");
+    console.error("Network error:", err);
+    setError(err instanceof Error ? err.message : "Network error occurred");
    } finally {
     setLoading(false);
    }
