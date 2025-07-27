@@ -101,15 +101,17 @@ jobs:
       vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
       working-directory: ./frontend
       vercel-args: "--prod"
+     continue-on-error: true
 
    - name: Install backend dependencies
      run: npm run install:backend
 
    - name: Deploy Backend to Render
-     uses: johnbeynon/render-deploy-action@v1.0.0
+     uses: johnbeynon/render-deploy-action@v1.1.0
      with:
       service-id: ${{ secrets.RENDER_SERVICE_ID }}
       api-key: ${{ secrets.RENDER_API_KEY }}
+     continue-on-error: true
 
    - name: Run Database Migrations
      run: |
