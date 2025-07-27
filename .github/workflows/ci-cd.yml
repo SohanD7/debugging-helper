@@ -198,7 +198,7 @@ jobs:
    - name: Check database configuration
      run: |
       echo "Checking database configuration..."
-      if [ -n "${{ vars.DATABASE_URL }}" ]; then
+      if [ -n "$DATABASE_URL" ]; then
         echo "✅ DATABASE_URL is configured"
         echo "Database URL length: ${#DATABASE_URL} characters"
       else
