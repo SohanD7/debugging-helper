@@ -107,10 +107,30 @@ jobs:
      run: npm run install:backend
 
    - name: Deploy Backend to Render
-     uses: johnbeynon/render-deploy-action@v1.1.0
-     with:
-      service-id: ${{ secrets.RENDER_SERVICE_ID }}
-      api-key: ${{ secrets.RENDER_API_KEY }}
+     run: |
+      if [ -z "${{ secrets.RENDER_SERVICE_ID }}" ] || [ -z "${{ secrets.RENDER_API_KEY }}" ]; then
+        echo "Render secrets not configured, skipping deployment"
+        exit 0
+      fi
+
+      echo "Deploying to Render..."
+      curl -X POST \
+        -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+        -H "Content-Type: application/json" \
+        "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
+        -d '{"clearCache": "do_not_clear"}' || echo "Render deployment failed, but continuing..."
+     continue-on-error: true
+
+   - name: Check Render service status
+     run: |
+      if [ -z "${{ secrets.RENDER_SERVICE_ID }}" ] || [ -z "${{ secrets.RENDER_API_KEY }}" ]; then
+        echo "Render secrets not configured, skipping status check"
+        exit 0
+      fi
+
+      echo "Checking Render service status..."
+      curl -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+        "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}" || echo "Status check failed"
      continue-on-error: true
 
    - name: Run Database Migrations
