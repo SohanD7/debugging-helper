@@ -35,14 +35,34 @@ jobs:
       cd backend
       npx prisma generate --schema=../prisma/schema.prisma
 
+   - name: Check environment variables
+     run: |
+      echo "Checking environment variables for release..."
+      if [ -n "${{ vars.DATABASE_URL }}" ]; then
+        echo "✅ DATABASE_URL is set"
+      else
+        echo "⚠️ DATABASE_URL not set, using fallback for tests"
+      fi
+      if [ -n "${{ vars.OPENAI_API_KEY }}" ]; then
+        echo "✅ OPENAI_API_KEY is set"
+      else
+        echo "⚠️ OPENAI_API_KEY not set, using fallback for tests"
+      fi
+      if [ -n "${{ vars.NEXT_PUBLIC_API_URL }}" ]; then
+        echo "✅ NEXT_PUBLIC_API_URL is set"
+      else
+        echo "⚠️ NEXT_PUBLIC_API_URL not set"
+      fi
+     continue-on-error: true
+
    - name: Run tests
      run: |
       npm run test:frontend
       npm run test:backend
      env:
       CI: true
-      DATABASE_URL: "file:./test.db"
-      OPENAI_API_KEY: ${{ vars.OPENAI_API_KEY }}
+      DATABASE_URL: ${{ vars.DATABASE_URL || 'file:./test.db' }}
+      OPENAI_API_KEY: ${{ vars.OPENAI_API_KEY || 'test-key' }}
 
    - name: Build frontend
      run: npm run build:frontend
@@ -89,6 +109,21 @@ jobs:
      uses: actions/setup-node@v4
      with:
       node-version: ${{ env.NODE_VERSION }}
+
+   - name: Check deployment environment
+     run: |
+      echo "Checking deployment environment variables..."
+      if [ -n "${{ vars.DATABASE_URL }}" ]; then
+        echo "✅ DATABASE_URL is set for migrations"
+      else
+        echo "❌ DATABASE_URL not set, migrations will fail"
+      fi
+      if [ -n "${{ vars.NEXT_PUBLIC_API_URL }}" ]; then
+        echo "✅ NEXT_PUBLIC_API_URL is set for frontend build"
+      else
+        echo "❌ NEXT_PUBLIC_API_URL not set, frontend build may fail"
+      fi
+     continue-on-error: true
 
    - name: Install frontend dependencies
      run: npm run install:frontend

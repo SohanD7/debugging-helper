@@ -195,8 +195,33 @@ jobs:
      with:
       node-version: ${{ env.NODE_VERSION }}
 
+   - name: Check database configuration
+     run: |
+      echo "Checking database configuration..."
+      if [ -n "${{ vars.DATABASE_URL }}" ]; then
+        echo "✅ DATABASE_URL is configured"
+        echo "Database URL length: ${#DATABASE_URL} characters"
+      else
+        echo "❌ DATABASE_URL is not configured"
+        echo "Please set DATABASE_URL in GitHub Environment Variables"
+        exit 1
+      fi
+     env:
+      DATABASE_URL: ${{ vars.DATABASE_URL }}
+
    - name: Install backend dependencies
      run: npm run install:backend
+
+   - name: Test Prisma schema loading
+     run: |
+      echo "Testing Prisma schema loading..."
+      cd backend
+      export DATABASE_URL="${{ vars.DATABASE_URL }}"
+      echo "DATABASE_URL is set: ${#DATABASE_URL} characters"
+      npx prisma validate --schema=../prisma/schema.prisma || echo "Prisma validation failed"
+     env:
+      DATABASE_URL: ${{ vars.DATABASE_URL }}
+     continue-on-error: true
 
    - name: Validate database connection
      run: |
@@ -208,6 +233,8 @@ jobs:
       echo "Testing database connection..."
       cd backend
       npx prisma db pull --schema=../prisma/schema.prisma || echo "Database connection test failed, but continuing..."
+     env:
+      DATABASE_URL: ${{ vars.DATABASE_URL }}
      continue-on-error: true
 
    - name: Run database migrations

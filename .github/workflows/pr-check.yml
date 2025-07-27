@@ -47,12 +47,27 @@ jobs:
      env:
       CI: true
 
+   - name: Check environment variables
+     run: |
+      echo "Checking environment variables for PR checks..."
+      if [ -n "${{ vars.DATABASE_URL }}" ]; then
+        echo "✅ DATABASE_URL is set"
+      else
+        echo "⚠️ DATABASE_URL not set, using fallback for PR checks"
+      fi
+      if [ -n "${{ vars.OPENAI_API_KEY }}" ]; then
+        echo "✅ OPENAI_API_KEY is set"
+      else
+        echo "⚠️ OPENAI_API_KEY not set, using fallback for PR checks"
+      fi
+     continue-on-error: true
+
    - name: Test backend
      run: npm run test:backend
      env:
       CI: true
-      DATABASE_URL: "file:./test.db"
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      DATABASE_URL: ${{ vars.DATABASE_URL || 'file:./test.db' }}
+      OPENAI_API_KEY: ${{ vars.OPENAI_API_KEY || 'test-key' }}
 
    - name: Security audit
      run: |
