@@ -58,7 +58,7 @@ jobs:
      run: npm run test:backend
      env:
       CI: true
-      DATABASE_URL: "file:./test.db"
+      DATABASE_URL: ${{ vars.DATABASE_URL }}
       OPENAI_API_KEY: ${{ vars.OPENAI_API_KEY }}
 
  # Build and deploy frontend to Vercel
