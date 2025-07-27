@@ -1,0 +1,127 @@
+name: Release and Deploy
+
+on:
+ push:
+  tags:
+   - "v*"
+
+env:
+ NODE_VERSION: "18.x"
+
+jobs:
+ release:
+  name: Create Release
+  runs-on: ubuntu-latest
+
+  steps:
+   - name: Checkout code
+     uses: actions/checkout@v4
+     with:
+      fetch-depth: 0
+
+   - name: Setup Node.js
+     uses: actions/setup-node@v4
+     with:
+      node-version: ${{ env.NODE_VERSION }}
+      cache: "npm"
+
+   - name: Install dependencies
+     run: |
+      npm ci
+      npm run install:frontend
+      npm run install:backend
+
+   - name: Setup Prisma
+     run: |
+      cd backend
+      npx prisma generate --schema=../prisma/schema.prisma
+
+   - name: Run tests
+     run: |
+      npm run test:frontend
+      npm run test:backend
+     env:
+      CI: true
+      DATABASE_URL: "file:./test.db"
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+   - name: Build frontend
+     run: npm run build:frontend
+     env:
+      NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+
+   - name: Build backend
+     run: npm run build:backend
+
+   - name: Create Release
+     uses: actions/create-release@v1
+     env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+     with:
+      tag_name: ${{ github.ref }}
+      release_name: Release ${{ github.ref }}
+      body: |
+       ## What's Changed
+
+       This release includes:
+       - Frontend improvements
+       - Backend optimizations
+       - Bug fixes and security updates
+
+       ## Deployment
+
+       - Frontend: Deployed to Vercel
+       - Backend: Deployed to Render
+       - Database: Migrations applied
+
+      draft: false
+      prerelease: false
+
+ deploy-production:
+  name: Deploy to Production
+  runs-on: ubuntu-latest
+  needs: release
+
+  steps:
+   - name: Checkout code
+     uses: actions/checkout@v4
+
+   - name: Setup Node.js
+     uses: actions/setup-node@v4
+     with:
+      node-version: ${{ env.NODE_VERSION }}
+      cache: "npm"
+
+   - name: Install frontend dependencies
+     run: npm run install:frontend
+
+   - name: Deploy Frontend to Vercel
+     uses: amondnet/vercel-action@v25
+     with:
+      vercel-token: ${{ secrets.VERCEL_TOKEN }}
+      vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+      vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+      working-directory: ./frontend
+      vercel-args: "--prod"
+
+   - name: Install backend dependencies
+     run: npm run install:backend
+
+   - name: Deploy Backend to Render
+     uses: johnbeynon/render-deploy-action@v1.0.0
+     with:
+      service-id: ${{ secrets.RENDER_SERVICE_ID }}
+      api-key: ${{ secrets.RENDER_API_KEY }}
+
+   - name: Run Database Migrations
+     run: |
+      cd backend
+      npx prisma migrate deploy --schema=../prisma/schema.prisma
+     env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+   - name: Notify Deployment
+     run: |
+      echo "🚀 Production deployment completed!"
+      echo "Frontend: https://debugging-helper.vercel.app"
+      echo "Backend: https://debugging-helper-backend.onrender.com"
