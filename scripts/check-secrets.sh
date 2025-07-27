@@ -12,31 +12,29 @@ fi
 echo "✅ Project structure verified"
 echo ""
 
-echo "📋 Required GitHub Secrets:"
+echo "📋 Required GitHub Secrets and Variables:"
 echo ""
 
-echo "🔐 Vercel Deployment Secrets:"
+echo "🔐 GitHub Secrets (Settings → Secrets and variables → Actions → Secrets):"
 echo "   - VERCEL_TOKEN (Required for frontend deployment)"
 echo "   - VERCEL_ORG_ID (Required for frontend deployment)"
 echo "   - VERCEL_PROJECT_ID (Required for frontend deployment)"
-echo ""
-
-echo "🚀 Render Deployment Secrets:"
 echo "   - RENDER_SERVICE_ID (Required for backend deployment)"
 echo "   - RENDER_API_KEY (Required for backend deployment)"
 echo ""
 
-echo "🌍 Environment Variables:"
+echo "🌍 GitHub Environment Variables (Settings → Secrets and variables → Actions → Variables):"
 echo "   - NEXT_PUBLIC_API_URL (Required for frontend build)"
 echo "   - DATABASE_URL (Required for database migrations)"
 echo "   - OPENAI_API_KEY (Required for backend functionality)"
 echo ""
 
-echo "📝 How to set up secrets:"
+echo "📝 How to set up:"
 echo "1. Go to your GitHub repository"
 echo "2. Navigate to Settings → Secrets and variables → Actions"
-echo "3. Click 'New repository secret'"
-echo "4. Add each secret with the exact names listed above"
+echo "3. For Secrets: Click 'New repository secret'"
+echo "4. For Variables: Click 'Variables' tab, then 'New repository variable'"
+echo "5. Add each with the exact names listed above"
 echo ""
 
 echo "🔗 Quick Links:"

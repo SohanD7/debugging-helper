@@ -59,7 +59,7 @@ jobs:
      env:
       CI: true
       DATABASE_URL: "file:./test.db"
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_API_KEY: ${{ vars.OPENAI_API_KEY }}
 
  # Build and deploy frontend to Vercel
  deploy-frontend:
@@ -96,7 +96,7 @@ jobs:
    - name: Build frontend
      run: npm run build:frontend
      env:
-      NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+      NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
 
    - name: Deploy to Vercel
      uses: amondnet/vercel-action@v25
@@ -198,12 +198,24 @@ jobs:
    - name: Install backend dependencies
      run: npm run install:backend
 
+   - name: Validate database connection
+     run: |
+      if [ -z "${{ vars.DATABASE_URL }}" ]; then
+        echo "❌ DATABASE_URL is not set, skipping database operations"
+        exit 0
+      fi
+
+      echo "Testing database connection..."
+      cd backend
+      npx prisma db pull --schema=../prisma/schema.prisma || echo "Database connection test failed, but continuing..."
+     continue-on-error: true
+
    - name: Run database migrations
      run: |
       cd backend
       npx prisma migrate deploy --schema=../prisma/schema.prisma
      env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DATABASE_URL: ${{ vars.DATABASE_URL }}
 
  # Security and dependency checks
  security:
@@ -263,7 +275,7 @@ jobs:
       npm run build
       echo "Frontend build completed successfully"
      env:
-      NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+      NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
 
    - name: Optional bundle analysis
      run: |
@@ -277,3 +289,23 @@ jobs:
      with:
       name: frontend-build
       path: frontend/.next/
+
+   - name: Debug environment variables
+     run: |
+      echo "Checking environment variables..."
+      if [ -n "${{ vars.DATABASE_URL }}" ]; then
+        echo "✅ DATABASE_URL is set"
+      else
+        echo "❌ DATABASE_URL is not set"
+      fi
+      if [ -n "${{ vars.NEXT_PUBLIC_API_URL }}" ]; then
+        echo "✅ NEXT_PUBLIC_API_URL is set"
+      else
+        echo "❌ NEXT_PUBLIC_API_URL is not set"
+      fi
+      if [ -n "${{ vars.OPENAI_API_KEY }}" ]; then
+        echo "✅ OPENAI_API_KEY is set"
+      else
+        echo "❌ OPENAI_API_KEY is not set"
+      fi
+     continue-on-error: true
