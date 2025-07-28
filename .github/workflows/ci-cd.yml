@@ -199,7 +199,6 @@ jobs:
      if: vars.DATABASE_URL != ''
      run: |
       echo "✅ DATABASE_URL is configured"
-      echo "Database URL length: ${{ length(vars.DATABASE_URL) }} characters"
 
    - name: Check database configuration - missing
      if: vars.DATABASE_URL == ''
