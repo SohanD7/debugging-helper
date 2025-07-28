@@ -2,6 +2,8 @@
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import {
  Sparkles,
  Copy,
@@ -205,65 +207,91 @@ function AnalysisSectionCard({
  const Icon = section.icon;
 
  const renderContent = (content: string) => {
-  const codeBlockRegex = /```(\w+)?\n([\s\S]*?)```/g;
-  const parts = [];
-  let lastIndex = 0;
-  let match;
-
-  while ((match = codeBlockRegex.exec(content)) !== null) {
-   // Add text before code block
-   if (match.index > lastIndex) {
-    const textContent = content.slice(lastIndex, match.index);
-    if (textContent.trim()) {
-     parts.push(
-      <div key={`text-${lastIndex}`} className="prose prose-sm max-w-none">
-       {textContent.split("\n").map((line, i) => (
-        <p key={i} className="mb-2 text-slate-700 leading-relaxed">
-         {line}
-        </p>
-       ))}
-      </div>
-     );
-    }
-   }
-
-   // Add code block
-   const language = match[1] || "javascript";
-   const code = match[2].trim();
-   parts.push(
-    <div key={`code-${match.index}`} className="my-4">
-     <CodeBlock language={language}>{code}</CodeBlock>
-    </div>
-   );
-
-   lastIndex = match.index + match[0].length;
-  }
-
-  // Add remaining text
-  if (lastIndex < content.length) {
-   const remaining = content.slice(lastIndex);
-   if (remaining.trim()) {
-    parts.push(
-     <div key={`text-${lastIndex}`} className="prose prose-sm max-w-none">
-      {remaining.split("\n").map((line, i) => (
-       <p key={i} className="mb-2 text-slate-700 leading-relaxed">
-        {line}
-       </p>
-      ))}
-     </div>
-    );
-   }
-  }
-
-  return parts.length > 0 ? (
-   parts
-  ) : (
+  // Use ReactMarkdown to properly render the content
+  return (
    <div className="prose prose-sm max-w-none">
-    {content.split("\n").map((line, i) => (
-     <p key={i} className="mb-2 text-slate-700 leading-relaxed">
-      {line}
-     </p>
-    ))}
+    <ReactMarkdown
+     remarkPlugins={[remarkGfm]}
+     components={{
+      // Custom code block component
+      code: ({ className, children, ...props }: any) => {
+       const match = /language-(\w+)/.exec(className || "");
+       const language = match ? match[1] : "javascript";
+       const isInline = !className?.includes("language-");
+
+       if (isInline) {
+        return (
+         <code
+          className="bg-slate-100 text-slate-800 px-1.5 py-0.5 rounded text-sm font-mono"
+          {...props}
+         >
+          {children}
+         </code>
+        );
+       }
+
+       return (
+        <CodeBlock language={language}>
+         {String(children).replace(/\n$/, "")}
+        </CodeBlock>
+       );
+      },
+      // Custom heading styles
+      h1: ({ children }) => (
+       <h1 className="text-2xl font-bold text-slate-900 mb-4 mt-6 first:mt-0">
+        {children}
+       </h1>
+      ),
+      h2: ({ children }) => (
+       <h2 className="text-xl font-semibold text-slate-800 mb-3 mt-5 first:mt-0">
+        {children}
+       </h2>
+      ),
+      h3: ({ children }) => (
+       <h3 className="text-lg font-medium text-slate-700 mb-2 mt-4 first:mt-0">
+        {children}
+       </h3>
+      ),
+      h4: ({ children }) => (
+       <h4 className="text-base font-medium text-slate-600 mb-2 mt-3 first:mt-0">
+        {children}
+       </h4>
+      ),
+      // Custom paragraph styles
+      p: ({ children }) => (
+       <p className="mb-3 text-slate-700 leading-relaxed last:mb-0">
+        {children}
+       </p>
+      ),
+      // Custom list styles
+      ul: ({ children }) => (
+       <ul className="mb-3 list-disc list-inside text-slate-700 space-y-1">
+        {children}
+       </ul>
+      ),
+      ol: ({ children }) => (
+       <ol className="mb-3 list-decimal list-inside text-slate-700 space-y-1">
+        {children}
+       </ol>
+      ),
+      li: ({ children }) => <li className="text-slate-700">{children}</li>,
+      // Custom blockquote styles
+      blockquote: ({ children }) => (
+       <blockquote className="border-l-4 border-blue-200 pl-4 py-2 my-4 bg-blue-50/50 italic text-slate-600">
+        {children}
+       </blockquote>
+      ),
+      // Custom strong and emphasis styles
+      strong: ({ children }) => (
+       <strong className="font-semibold text-slate-800">{children}</strong>
+      ),
+      em: ({ children }) => (
+       <em className="italic text-slate-700">{children}</em>
+      ),
+     }}
+    >
+     {content}
+    </ReactMarkdown>
    </div>
   );
  };
