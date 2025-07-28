@@ -196,16 +196,20 @@ jobs:
       node-version: ${{ env.NODE_VERSION }}
 
    - name: Check database configuration
-     if: vars.DATABASE_URL != ''
      run: |
-      echo "✅ DATABASE_URL is configured"
+      echo "=== Database Configuration Check ==="
+      echo "GitHub vars.DATABASE_URL: '${{ vars.DATABASE_URL }}'"
+      echo "GitHub vars.DATABASE_URL empty check: '${{ vars.DATABASE_URL == '' }}'"
+      echo "GitHub vars.DATABASE_URL not empty check: '${{ vars.DATABASE_URL != '' }}'"
 
-   - name: Check database configuration - missing
-     if: vars.DATABASE_URL == ''
-     run: |
-      echo "❌ DATABASE_URL is not configured"
-      echo "Please set DATABASE_URL in GitHub Environment Variables"
-      exit 1
+      if [ "${{ vars.DATABASE_URL }}" != "" ]; then
+        echo "✅ DATABASE_URL is configured"
+      else
+        echo "❌ DATABASE_URL is not configured"
+        echo "Please set DATABASE_URL in GitHub Environment Variables"
+        echo "Go to: Settings → Secrets and variables → Actions → Variables"
+        exit 1
+      fi
 
    - name: Install backend dependencies
      run: npm run install:backend
